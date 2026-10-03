@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PAYSONA | Profile</title>
+  <style>
+    /* Base Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    /* Pure Black Background and Center Layout */
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+      padding: 20px;
+    }
+
+    /* --- Dynamic Floating Blurry Shapes Background --- */
+    .bg-shapes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .shape {
+      position: absolute;
+      background-color: #ffffff;
+      border-radius: 50%;
+      filter: blur(120px); /* Heavy blur for a soft, ethereal glow */
+      opacity: 0.15; /* Visible but subtle against pure black */
+      will-change: transform;
+    }
+
+    /* Individual Shapes with different sizes, positions, and animations */
+    .shape-1 {
+      width: 40vw;
+      height: 40vw;
+      top: -10vw;
+      left: -10vw;
+      animation: float1 15s infinite alternate ease-in-out;
+    }
+
+    .shape-2 {
+      width: 50vw;
+      height: 50vw;
+      bottom: -20vw;
+      right: -10vw;
+      animation: float2 18s infinite alternate ease-in-out;
+      animation-delay: -5s;
+    }
+
+    .shape-3 {
+      width: 30vw;
+      height: 30vw;
+      top: 30%;
+      left: 50%;
+      animation: float3 12s infinite alternate ease-in-out;
+      animation-delay: -2s;
+    }
+
+    .shape-4 {
+      width: 35vw;
+      height: 35vw;
+      bottom: 10%;
+      left: -5%;
+      animation: float1 20s infinite alternate ease-in-out;
+      animation-delay: -10s;
+    }
+
+    .shape-5 {
+      width: 25vw;
+      height: 25vw;
+      top: 10%;
+      right: 15%;
+      animation: float2 14s infinite alternate ease-in-out;
+      animation-delay: -7s;
+    }
+
+    .shape-6 {
+      width: 45vw;
+      height: 45vw;
+      bottom: -15vw;
+      left: 20%;
+      animation: float3 22s infinite alternate ease-in-out;
+      animation-delay: -3s;
+    }
+
+    /* Complex Keyframes for Organic, Fluid Movement */
+    @keyframes float1 {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      50% {
+        transform: translate(15vw, 20vh) scale(1.2);
+      }
+      100% {
+        transform: translate(-10vw, 10vh) scale(0.9);
+      }
+    }
+
+    @keyframes float2 {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      50% {
+        transform: translate(-20vw, -15vh) scale(0.8);
+      }
+      100% {
+        transform: translate(10vw, -25vh) scale(1.3);
+      }
+    }
+
+    @keyframes float3 {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      50% {
+        transform: translate(10vw, -20vh) scale(1.1);
+      }
+      100% {
+        transform: translate(-15vw, 15vh) scale(0.85);
+      }
+    }
+
+    /* --- Main Profile Card --- */
+    .profile-card {
+      position: relative;
+      z-index: 1;
+      background-color: #0a0a0a; /* Very dark gray, practically black */
+      border: 1px solid #333333; /* Simple border instead of shadow */
+      border-radius: 12px;
+      padding: 40px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    /* Profile Picture */
+    .profile-img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #ffffff; /* Simple white border */
+      background-color: #000000;
+      margin-bottom: 20px;
+    }
+
+    /* Typography */
+    h1 {
+      font-size: 1.8rem;
+      letter-spacing: 5px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    p {
+      font-size: 0.85rem;
+      color: #888888; /* Light gray for contrast */
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+    }
+
+    /* --- Instagram Button --- */
+    .insta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      padding: 14px 20px;
+      background-color: transparent;
+      border: 1px solid #ffffff;
+      border-radius: 50px;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+
+    /* Instagram Icon - Inverts the black image to white by default */
+    .insta-btn img {
+      width: 20px;
+      height: 20px;
+      filter: invert(1); 
+      transition: filter 0.3s ease;
+    }
+
+    /* Button Hover Effects */
+    .insta-btn:hover {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    /* On hover, remove the invert filter (changes back to default black) */
+    .insta-btn:hover img {
+      filter: none; 
+    }
+
+    /* --- Mobile Responsiveness --- */
+    @media (max-width: 480px) {
+      .profile-card {
+        padding: 30px 20px;
+      }
+
+      .profile-img {
+        width: 110px;
+        height: 110px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+        letter-spacing: 3px;
+      }
+
+      p {
+        font-size: 0.75rem;
+      }
+
+      .insta-btn {
+        padding: 12px 16px;
+        font-size: 0.85rem;
+      }
+      
+      /* Adjust shapes for smaller screens */
+      .shape {
+        filter: blur(80px);
+      }
+      .shape-1, .shape-2, .shape-6 {
+        width: 70vw;
+        height: 70vw;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dynamic Floating Blurry Shapes -->
+  <div class="bg-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="shape shape-4"></div>
+    <div class="shape shape-5"></div>
+    <div class="shape shape-6"></div>
+  </div>
+
+  <!-- Main Content Card -->
+  <main class="profile-card">
+    
+    <!-- Replace "paysona.png" with your actual image file name if different -->
+    <img src="image.png" alt="PAYSONA Logo" class="profile-img">
+    
+    <h1>PAYSONA</h1>
+    <p>Digital Brand</p>
+
+    <!-- Replace the href with your actual Instagram link -->
+    <a href="https://www.instagram.com/paysona_?stkn=MWlveDd5ZjdvM3Vpdg==" class="insta-btn" target="_blank" rel="noopener noreferrer">
+      <!-- Replace "instagram-icon.png" with the exact file name you saved the icon as -->
+      <img src="instagram.png" alt="Instagram Icon">
+      <span>Instagram</span>
+    </a>
+
+  </main>
+
+</body>
+</html>
